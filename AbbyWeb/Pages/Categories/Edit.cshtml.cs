@@ -19,8 +19,9 @@ namespace AbbyWeb.Pages.Categories;
             
         }
 
-        public void OnGet()
+        public void OnGet(int id)
         {
+        Category = _db.Category.Find(id);
         }
 
         public async Task<IActionResult> OnPost( ) 
@@ -33,7 +34,7 @@ namespace AbbyWeb.Pages.Categories;
 
         }
         if (ModelState.IsValid) {
-            await _db.Category.AddAsync(Category);
+            _db.Category.Update(Category);
             await _db.SaveChangesAsync();
             return RedirectToPage("Index");
         }
